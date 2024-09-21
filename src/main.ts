@@ -107,6 +107,7 @@ async function run(): Promise<void> {
 
     let content: string
     if (diff.length === 0) {
+      // eslint-disable-next-line i18n-text/no-en
       content = 'No differences'
     } else {
       content = markdownTable([
@@ -126,6 +127,7 @@ ${content}
 
     const pullRequestId = github.context.issue.number
     if (!pullRequestId) {
+      // eslint-disable-next-line i18n-text/no-en
       core.warning('Cannot find the PR id.')
       core.info(message)
       return
