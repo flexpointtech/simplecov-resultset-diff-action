@@ -2,7 +2,7 @@ import * as path from 'path'
 import * as fs from 'fs'
 import * as github from '@actions/github'
 import * as core from '@actions/core'
-import markdownTable from 'markdown-table'
+import {markdownTable} from 'markdown-table'
 import {
   ResultSet,
   Coverage,
@@ -107,6 +107,7 @@ async function run(): Promise<void> {
 
     let content: string
     if (diff.length === 0) {
+      // eslint-disable-next-line i18n-text/no-en
       content = 'No differences'
     } else {
       content = markdownTable([
@@ -126,19 +127,20 @@ ${content}
 
     const pullRequestId = github.context.issue.number
     if (!pullRequestId) {
+      // eslint-disable-next-line i18n-text/no-en
       core.warning('Cannot find the PR id.')
       core.info(message)
       return
     }
 
-    await octokit.issues.createComment({
+    await octokit.rest.issues.createComment({
       owner: github.context.repo.owner,
       repo: github.context.repo.repo,
       issue_number: pullRequestId,
       body: message
     })
   } catch (error) {
-    core.setFailed(error.message)
+    core.setFailed((error as Error).message)
   }
 }
 
