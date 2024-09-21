@@ -2,7 +2,7 @@ import * as path from 'path'
 import * as fs from 'fs'
 import * as github from '@actions/github'
 import * as core from '@actions/core'
-import markdownTable from 'markdown-table'
+import {markdownTable} from 'markdown-table'
 import {
   ResultSet,
   Coverage,
@@ -131,14 +131,14 @@ ${content}
       return
     }
 
-    await octokit.issues.createComment({
+    await octokit.rest.issues.createComment({
       owner: github.context.repo.owner,
       repo: github.context.repo.repo,
       issue_number: pullRequestId,
       body: message
     })
   } catch (error) {
-    core.setFailed(error.message)
+    core.setFailed((error as Error).message)
   }
 }
 
