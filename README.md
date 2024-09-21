@@ -20,7 +20,7 @@ Creates a comment inside your Pull-Request with the difference between two Simpl
 To use this Github action, in your steps you may have:
 
 ```yaml
-uses: pupeno/simplecov-resultset-diff-action@v1.2
+uses: pupeno/simplecov-resultset-diff-action@v1.3
 with:
   base-resultset-path: '/path/to/my/.resultset.json'
   head-resultset-path: '/path/to/my/.resultset.json'
@@ -143,7 +143,7 @@ Now, in a new job we can retrieve both of our saved resultsets from the artifact
 
       - run: find .
 
-      - uses: pupeno/simplecov-resultset-diff-action@v1.2
+      - uses: pupeno/simplecov-resultset-diff-action@v1.3
         with:
           base-resultset-path: ./base-result/.resultset.json
           head-resultset-path: ./head-result/.resultset.json
